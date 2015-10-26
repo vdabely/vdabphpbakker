@@ -150,6 +150,10 @@ p small {
 .button a {
     color: red;
 }
+dt {
+    margin: 0 0 1em;
+    border-bottom: thin red solid;
+}
 dl {
     padding: 1em;
 }

@@ -47,12 +47,18 @@ class KlantenDAO {
     }
 
     public static function createKlant($Email, $Paswoord, $Naam, $Vnaam, $Adres, $Postcode, $Gemeente, $Aktief) {
-        $sql = "INSERT INTO klanten (Email, Paswoord, Naam, Vnaam, Adres, Postcode, Gemeente, Aktief) VALUES ('".$Email."', '".$Paswoord."', '".$Naam."', '".$Vnaam."', '".$Adres."', '".$Postcode."', '".$Gemeente."', '".$Aktief."');";
-        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
-        $dbh->exec($sql);
-        $KlantId = $dbh->lastInsertId();
-        $dbh=NULL;
-        return $KlantId;
+        $nieuweKlant = KlantenDAO::getKlantFromEmail($Email);
+        if (!isset($nieuweKlant)) {
+            $sql = "INSERT INTO klanten (Email, Paswoord, Naam, Vnaam, Adres, Postcode, Gemeente, Aktief) VALUES ('".$Email."', '".$Paswoord."', '".$Naam."', '".$Vnaam."', '".$Adres."', '".$Postcode."', '".$Gemeente."', '".$Aktief."');";
+            $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+            $dbh->exec($sql);
+            $KlantId = $dbh->lastInsertId();
+            $dbh=NULL;
+            return $KlantId;
+        }
+        if (isset($nieuweKlant)) {
+            return NULL;
+        }
     }
 
   }

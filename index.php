@@ -1,5 +1,7 @@
 <?php
 
+setlocale(LC_TIME, 'NL_nl');
+
 require_once("business/productservice.php");
 require_once("business/klantenservice.php");
 require_once("business/bestellingservice.php");

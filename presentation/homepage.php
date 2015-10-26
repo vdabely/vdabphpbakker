@@ -25,6 +25,9 @@
                 if (!isset($_COOKIE['LoginC'])&&($page=='registreer'||$page=='login'||$page=='faq')) {
                     include ($file);
                 }
+                if (!isset($_COOKIE['LoginC'])){
+                    include ('presentation/home.php');
+                }
             }
         }
         if (!isset($_GET['page'])||!file_exists($file)) {

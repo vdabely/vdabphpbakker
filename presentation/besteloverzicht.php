@@ -9,7 +9,7 @@ foreach ($arrBestellingen as $bestelling) {
     print ("<div class='innercontainer txtL'>");
     $datum = date('d-m-Y',strtotime($bestelling->Besteldatum));
     $BestelID = $bestelling->BestelID;
-    print ("<dl><dt>Bestelling van ".$datum."</dt>");
+    print ("<dl><dt>Bestelling voor ".$datum."</dt>");
     $arrBestelling = BestellingDAO::getBestellingRegelsFromId($BestelID);
     $totprijs=0;
     foreach ($arrBestelling as $regel) {
@@ -23,7 +23,8 @@ foreach ($arrBestellingen as $bestelling) {
         }
         $totprijs += $prijs;
     }
-    print ("<hr><dt>Totaalprijs = &euro; ".$totprijs."</dt></dl>");
+    print ("<dt>Totaalprijs = &euro; ".$totprijs."</dt>");
+    print ("<dt></dt></dl>");
     print ("</div>");
 }
 if (!$arrBestellingen) {
