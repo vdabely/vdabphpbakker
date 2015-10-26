@@ -1,9 +1,4 @@
 <?php
-if (!isset($_COOKIE['LoginC'])) {
-    header("Location: index.php?page=login");
-    die();
-}
-
     $arrBestelRegel = $_SESSION['bestelregelarray'];
     $karNietLeeg = bestelService::winkelkarNietLeeg($arrBestelRegel);
 

@@ -14,11 +14,17 @@
         <?php include('presentation/locked/header.php') ?>
 <!-- ********  CONTENT-Container  ******** -->
         <?php
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+            if (isset($_COOKIE['LoginC'])) {
+                include ('presentation/'.$page.'.php');
+            }
+            if (!isset($_COOKIE['LoginC'])&&($page=='registreer'||$page=='login'||$page=='faq')) {
+                include ('presentation/'.$_GET['page'].'.php');
+            }
+        }
         if (!isset($_GET['page'])) {
             include 'presentation/home.php';
-        }
-        if (isset($_GET['page'])) {
-            include ('presentation/'.$_GET['page'].'.php');
         }
         ?>
 <!-- ********  Footer-Container  ******** -->

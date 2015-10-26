@@ -1,10 +1,4 @@
 <?php
-
-if (!isset($_COOKIE['LoginC'])) {
-    header("Location: index.php?page=login");
-    die();
-}
-
 if (isset($_GET['winkelkar'])&&$_GET['winkelkar']=='leeg') {
     session_destroy();
     header("Location: index.php?page=bestel");

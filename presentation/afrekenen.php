@@ -1,9 +1,5 @@
 <?php
 
-if (!isset($_COOKIE['LoginC'])) {
-    header("Location: index.php?page=login");
-    die();
-}
 $klantID = $_COOKIE['LoginC'];
 
 if (isset($_SESSION['bestelregelarray'])) { 
@@ -19,7 +15,7 @@ if (isset($_GET['pay'])) {
     $prijs = $_GET['pay'];
     $bestelDoorgevoerd = bestelService::bestellingDoorvoeren($arrBestelRegel, $datum, $prijs);
     if ($bestelDoorgevoerd) {
-        header("Location: index.php");
+        header("Location: ?page=besteloverzicht");
         die();
     }
     $msg = "Al besteld die dag. Opnieuw : ";

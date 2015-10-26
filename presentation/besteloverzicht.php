@@ -1,9 +1,4 @@
 <?php
-if (!isset($_COOKIE['LoginC'])) {
-    header("Location: index.php?page=login");
-    die();
-}
-
 $klantID = $_COOKIE['LoginC'];
 ?>
         <div class="wrapper clearfix">
@@ -14,6 +9,7 @@ $klantID = $_COOKIE['LoginC'];
 <?php
 $arrBestellingen = BestellingDAO::getAlleBestellingenVanKlant($klantID);
 foreach ($arrBestellingen as $bestelling) {
+    print ("<div class='innercontainer'>");
     $datum = date('d-m-Y',strtotime($bestelling->Besteldatum));
     $BestelID = $bestelling->BestelID;
     print ("<dl><dt>Bestelling van ".$datum."</dt>");
@@ -30,7 +26,8 @@ foreach ($arrBestellingen as $bestelling) {
         }
         $totprijs += $prijs;
     }
-    print ("<dd>------------------------------------------</dd><dd>&nbsp;&nbsp;Totaalprijs = &euro; ".$totprijs."</dd></dl>");
+    print ("<hr><dt>Totaalprijs = &euro; ".$totprijs."</dt></dl>");
+    print ("</div>");
 }
 if (!$arrBestellingen) {
     print ("<dt>Geen bestellingen geplaatst.</dt>");

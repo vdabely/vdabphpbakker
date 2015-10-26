@@ -1,10 +1,5 @@
 <?php
 
-if (!isset($_COOKIE['LoginC'])) {
-    header("Location: index.php?page=login");
-    die();
-}
-
 if (isset($_GET['product'])&&isset($_GET['aantal'])) {
     $_SESSION['bestelregelarray'] = bestelService::bestelregelAanpassen($_SESSION['bestelregelarray'], $_GET['product'], $_GET['aantal']);
 } 
