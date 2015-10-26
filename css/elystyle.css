@@ -33,6 +33,13 @@ body {
     background-color: white;
     box-shadow: 0 0 50px 0 #ddd;
 }
+.innercontainer {
+    background-color: wheat;
+    box-shadow: 0 0 50px 0 #ddd;
+    border: thin black dotted;
+    display: inline-block;
+    margin: 20px;
+}
 .wrapper {
     border-top: thin solid #DDD;
     padding: 20px 0;
@@ -143,8 +150,7 @@ p small {
     color: red;
 }
 dl {
-    padding: 0 1em 1em;
-    border-bottom: solid thin red;
+    padding: 1em;
 }
 dt {
     margin: 0 2em;
@@ -160,9 +166,6 @@ label {
 }
 input {
     padding: 0 0.1em;
-}
-li {
-    
 }
 /********************* @MEDIA *********************/ 
 @media (min-width: 475px) {
