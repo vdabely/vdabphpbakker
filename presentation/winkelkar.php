@@ -13,7 +13,9 @@ if (isset($arrBestelRegel)&&$karNietLeeg) {
                 <a href="?page=afrekenen&winkelkar=afrekenen">Afrekenen</a> -
 <?php } ?>
             </div>
-            <div class="wrapper clearfix">
+            <div class="innercontainer">
+                <dl>
+                    <dt>Winkelmandje</dt>
                 <?php 
                     $totprijs=0;
                     foreach ($_SESSION['bestelregelarray'] as $regel){
@@ -23,12 +25,13 @@ if (isset($arrBestelRegel)&&$karNietLeeg) {
                         $productPrijs = $product->prijs;
                         $prijs = $aantal * $productPrijs;
                         if ($aantal) {
-                            print ($aantal." x ".$product->product." <strong>&euro; ".$productPrijs."</strong> = &euro; ".$prijs."</br>");
+                            print ("<dd>".$aantal." x ".$product->product." <strong>&euro; ".$productPrijs."</strong> = &euro; ".$prijs."</dd>");
                         }
                         $totprijs += $prijs;
                     }
-                    print ("------------------------------<br>&nbsp;&nbsp;Totaalprijs = &euro; ".$totprijs);
+                    print ("<dt><hr>&nbsp;&nbsp;Totaalprijs = &euro; ".$totprijs."</dt>");
                 ?>
+                </dl>
             </div>
         </div>
 <?php 

@@ -161,12 +161,18 @@ dd {
     margin: 0 4em;
 }
 label {
-    width: 10em;
+    width: 7em;
     text-align: right;
     padding-right: 0.5em;
 }
 input {
     padding: 0 0.1em;
+}
+em {
+    color: red;
+    font-size: 0.9em;
+    font-variant: small-caps;
+    vertical-align: super;
 }
 /********************* @MEDIA *********************/ 
 @media (min-width: 475px) {
@@ -189,6 +195,9 @@ input {
     }
 }
 @media (min-width: 768px) {
+    label {
+        width: 12em;
+    }
     .container {
         padding: 14px 14px 5px;
         margin-top: 10px;

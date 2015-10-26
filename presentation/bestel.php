@@ -8,7 +8,7 @@
                     print ("<h2>".$categorie."</h2>");
                     foreach ($arrProducten as $product) {
                         if ($product->categorie ==  $categorie) {
-                            print ("<li><a href='index.php?page=bestelling&product=".$product->id."'>".$product->product." <strong>&euro; ".$product->prijs."</strong></a></li>");
+                            print ("<dd><a href='index.php?page=bestelling&product=".$product->id."'>".$product->product." <strong>&euro; ".$product->prijs."</strong></a></dd>");
                         }
                     }
                 }

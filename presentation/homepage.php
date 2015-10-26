@@ -16,15 +16,19 @@
         <?php
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
-            if (isset($_COOKIE['LoginC'])) {
-                include ('presentation/'.$page.'.php');
-            }
-            if (!isset($_COOKIE['LoginC'])&&($page=='registreer'||$page=='login'||$page=='faq')) {
-                include ('presentation/'.$_GET['page'].'.php');
+            $file = 'presentation/'.$page.'.php';
+            if (file_exists($file)) {
+                if (isset($_COOKIE['LoginC'])) {
+                    $klantID = $_COOKIE['LoginC'];
+                    include ($file);
+                }
+                if (!isset($_COOKIE['LoginC'])&&($page=='registreer'||$page=='login'||$page=='faq')) {
+                    include ($file);
+                }
             }
         }
-        if (!isset($_GET['page'])) {
-            include 'presentation/home.php';
+        if (!isset($_GET['page'])||!file_exists($file)) {
+            include ('presentation/home.php');
         }
         ?>
 <!-- ********  Footer-Container  ******** -->

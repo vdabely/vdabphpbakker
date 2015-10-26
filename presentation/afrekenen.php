@@ -1,7 +1,5 @@
 <?php
 
-$klantID = $_COOKIE['LoginC'];
-
 if (isset($_SESSION['bestelregelarray'])) { 
     $arrBestelRegel = $_SESSION['bestelregelarray'];
 }

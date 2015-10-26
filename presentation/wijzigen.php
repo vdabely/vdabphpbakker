@@ -20,7 +20,9 @@ if (!$karNietLeeg) {
                 - <a href="?page=bestelling">Verder winkelen</a> 
                 - <a href="?page=afrekenen&winkelkar=afrekenen">Afrekenen</a> -
             </div>
-            <div class="wrapper clearfix">
+            <div class="innercontainer">
+                <dl>
+                    <dt>Winkelmandje aanpassen</dt>
                 <?php 
                     $totprijs=0;
                     foreach ($arrBestelRegel as $regel){
@@ -30,12 +32,13 @@ if (!$karNietLeeg) {
                         $productPrijs = $product->prijs;
                         $prijs = $aantal * $productPrijs;
                         if ($aantal) {
-                            print ("<a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."'&aantal='".$aantal."'>".$aantal." x ".$product->product." <strong>&euro; ".$productPrijs."</strong></a> = &euro; ".$prijs." <a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."&aantal=0'> Haal dit uit winkelmand</a></br>");
+                            print ("<dd><a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."'&aantal='".$aantal."'>".$aantal." x ".$product->product." <strong>&euro; ".$productPrijs."</strong></a> = &euro; ".$prijs." <a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."&aantal=0'> Haal dit uit winkelmand</a></dd>");
                         }
                         $totprijs += $prijs;
                     }
-                    print ("------------------------------<br>&nbsp;&nbsp;Totaalprijs = &euro; ".$totprijs);
+                    print ("<hr>&nbsp;&nbsp;Totaalprijs = &euro; ".$totprijs);
                 ?>
+                </dl>
             </div>
         </div>
     <?php 

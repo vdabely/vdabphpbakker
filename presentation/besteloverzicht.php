@@ -1,6 +1,3 @@
-<?php
-$klantID = $_COOKIE['LoginC'];
-?>
         <div class="wrapper clearfix">
             <div class="txtC">
                 <h1>Besteloverzicht</h1>

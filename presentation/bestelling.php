@@ -27,7 +27,7 @@ if ((isset($_SESSION['bestelregelarray'])&&!empty($_SESSION['bestelregelarray'])
                 <form action="index.php" method="get">
                     <input type="hidden" name="page" value="bestelling">
                     <input type="hidden" name="product" value="<?php print($IDproduct->id); ?>">
-                    <input type="text" name="aantal" value="1" style="width: 30px;" autofocus=""><?php print (" x ".$IDproduct->product." aan &euro; ".$IDproduct->prijs); ?></br>
+                    <input type="text" name="aantal" value="1" style="width: 30px;" autofocus=""><?php print (" x <strong>".$IDproduct->product."</strong> aan &euro; ".$IDproduct->prijs); ?></br></br>
                     <input type="submit" value="voeg toe.">
                 </form>
             </div>
