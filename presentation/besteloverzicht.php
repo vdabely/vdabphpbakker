@@ -5,11 +5,11 @@ $klantID = $_COOKIE['LoginC'];
             <div class="txtC">
                 <h1>Besteloverzicht</h1>
             </div>
-            <div class="wrapper clearfix">
+            <div class="wrapper clearfix txtC">
 <?php
 $arrBestellingen = BestellingDAO::getAlleBestellingenVanKlant($klantID);
 foreach ($arrBestellingen as $bestelling) {
-    print ("<div class='innercontainer'>");
+    print ("<div class='innercontainer txtL'>");
     $datum = date('d-m-Y',strtotime($bestelling->Besteldatum));
     $BestelID = $bestelling->BestelID;
     print ("<dl><dt>Bestelling van ".$datum."</dt>");
