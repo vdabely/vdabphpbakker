@@ -5,10 +5,8 @@
     
 </div>
 <?php
-    if (isset($_COOKIE['LoginC'])) {
-        session_destroy();
-        setcookie('LoginC','',time()-3600);
-        header('Refresh: 1; url=index.php');
-        die();
+    if (isset($_SESSION['LoginC'])) {
+        loginservice::logout();
+        header("Location: index.php");    
     }
 ?>

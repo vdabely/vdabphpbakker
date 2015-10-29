@@ -1,13 +1,14 @@
 <?php
 
 require_once("data/bestellingDAO.php");
+require_once("data/bestelregelDAO.php");
 require_once("entities/bestelregel.class.php");
 
-class bestelService {
+class bestelRegelService {
 
     public static function bestelregelToevoegen($arrBestelRegel, $productID, $aantal) {
         /* returnt arrBestelRegel met toegevoegd of updated regel.*/
-        $dubbel = bestelService::checkAlBesteld($arrBestelRegel, $productID, $aantal);
+        $dubbel = bestelRegelService::checkAlBesteld($arrBestelRegel, $productID, $aantal);
         if (!$dubbel) {
             $objRegel = new Bestelregel($productID, $aantal);
             array_push($arrBestelRegel, $objRegel);
@@ -66,37 +67,9 @@ class bestelService {
         return $Prijs;
     }
     
-    public function bestellingDoorvoeren($arrBestelRegel, $datum, $prijs) {
-        /* Voert een bestelling door naar DB */
-        $KlantID = $_COOKIE['LoginC'];
-        $BestelID = BestellingDAO::createBestelling($KlantID, $datum, $arrBestelRegel, $prijs);
-        foreach ($arrBestelRegel as $regel) {
-            $Aantal = $regel->aantal;
-            if ($Aantal) {
-                $ProductID = $regel->productID;
-                $product = productService::getProductFromId($ProductID);
-                $productPrijs = $product->prijs;
-                $Prijs = $Aantal * $productPrijs;
-                BestellingDAO::createBestelRegel($BestelID, $ProductID, $Aantal, $Prijs);
-                $Aantal=0;
-            }
-        }
-        session_destroy();
-        return TRUE;
-    }
-    
-    public function alBesteldDieDag($datum, $klantID) {
-        /* Controleerd of die mens al besteld heeft voor die dag.
-         * return false als hij al besteld heeft         */
-        $arrBestellingen = BestellingDAO::getAlleBestellingenVanKlant($klantID);
-        foreach ($arrBestellingen as $rij) {
-            $DBdatum = $rij->Besteldatum;
-            if ($DBdatum == $datum) {
-                return TRUE;
-                die();
-            }
-        }
-        return FALSE;
-    }
+  public static function getBestelRegelsFromId($BestelID) {
+    $arrBestelRegel = BestelRegelDAO::getBestellingRegelsFromId($BestelID);
+    return $arrBestelRegel;
+  }
 
 }

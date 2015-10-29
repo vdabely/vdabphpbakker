@@ -26,5 +26,8 @@ Paswoord : aXBvnR
 
 Login : ely@telenet.be
 Paswoord : SqXrkn
+ 
+Login : jan.vandorpe@vdab.be
+Paswoord : 7GRftr
  */
 ?>

@@ -1,11 +1,11 @@
 <?php
 
 if (isset($_GET['product'])&&isset($_GET['aantal'])) {
-    $_SESSION['bestelregelarray'] = bestelService::bestelregelAanpassen($_SESSION['bestelregelarray'], $_GET['product'], $_GET['aantal']);
+    $_SESSION['bestelregelarray'] = bestelRegelService::bestelregelAanpassen($_SESSION['bestelregelarray'], $_GET['product'], $_GET['aantal']);
 } 
 
 $arrBestelRegel = $_SESSION['bestelregelarray'];
-$karNietLeeg = bestelService::winkelkarNietLeeg($arrBestelRegel);
+$karNietLeeg = bestelRegelService::winkelkarNietLeeg($arrBestelRegel);
 
 if (!$karNietLeeg) {
     header("Location: index.php?page=bestelling");
@@ -32,11 +32,11 @@ if (!$karNietLeeg) {
                         $productPrijs = $product->prijs;
                         $prijs = $aantal * $productPrijs;
                         if ($aantal) {
-                            print ("<dd><a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."'&aantal='".$aantal."'>".$aantal." x ".$product->product." <strong>&euro; ".$productPrijs."</strong></a> = &euro; ".$prijs." <a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."&aantal=0'> Haal dit uit winkelmand</a></dd>");
+                            print ("<dd><a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."'>".$aantal." x ".$product->product." <strong>&euro; ".$productPrijs."</strong></a> = &euro; ".$prijs." <a href='?page=wijzigen&winkelkar=wijzigen&product=".$productID."&aantal=0'> Haal dit uit winkelmand</a></dd>");
                         }
                         $totprijs += $prijs;
                     }
-                    print ("<hr>&nbsp;&nbsp;Totaalprijs = &euro; ".$totprijs);
+                    print ("<dt>Totaalprijs = &euro; ".$totprijs."</dt>");
                 ?>
                 </dl>
             </div>
@@ -53,7 +53,7 @@ if (!$karNietLeeg) {
                     <input type="hidden" name="winkelkar" value="wijzigen">
                     <input type="hidden" name="product" value="<?php print($IDproduct->id); ?>">
                     <input type="text" name="aantal" value="" style="width: 30px;" autofocus=""><?php print (" x ".$IDproduct->product." aan &euro; ".$IDproduct->prijs); ?></br>
-                    <input type="submit" value="Pas aan.">
+                    <input type="submit" value="Pas aan." class="button">
                 </form>
             </div>
         </div>

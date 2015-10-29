@@ -15,6 +15,7 @@ if (isset($_POST['Aktief'])) {
     if ($Vnaam&&$Naam&&$Adres&&$Postcode&&$Gemeente&&$Email) {
         $length = 6;
         $Paswoord = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+//        $DBPaswoord = sha1($Paswoord1);
         $DBPaswoord = sha1($Paswoord);
         $registreer = klantService::maakKlant($Email, $DBPaswoord, $Naam, $Vnaam, $Adres, $Postcode, $Gemeente, $Aktief);
         if ($registreer) {        
@@ -43,13 +44,13 @@ if (!isset($Paswoord)) {
             <dd><label for="Email">Email : </label><input type="email" name="Email" placeholder="joske@vermeulen.be" value="<?php if (isset($Email)) { print($Email); }?>"><em>*</em></dd>
 <!--            <dd><label for="Paswoord1">Paswoord : </label><input type="password" name="Paswoord1" placeholder="******"><em>*</em></dd>
             <dd><label for="Paswoord2">Paswoord check : </label><input type="password" name="Paswoord2" placeholder="******"><em>*</em></dd>-->
-            <dd class="txtC"><em> * Verplicht in te vullen gegevens.</em><br><button type="cancel" onclick="window.location='index.php?page=registreer';return false;">Maak leeg</button>&nbsp;&nbsp;<input type="submit" value="Registreer"></dd>
+            <dd class="txtC"><em> * Verplicht in te vullen gegevens.</em><br><button type="cancel" class="button" onclick="window.location='index.php?page=registreer';return false;">Maak leeg</button>&nbsp;&nbsp;<input type="submit" class="button" value="Registreer"></dd>
         </dl>
     </form>
 </div>
 <?php
 }
-if ($Paswoord) {
+if (isset($Paswoord)&&$Paswoord) {
 ?>
 <div class="wrapper clearfix txtC">
     <form action="?page=registreer" method="post">

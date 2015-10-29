@@ -59,37 +59,11 @@ body {
     color: red;
     text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);
 }
-.img30vw {
-    width: 150px;
-    width: 30vw;
-    max-width: 200px;
-    min-width: 150px;
-}
-.img50vw {
-    width: 150px;
-    width: 50vw;
-    max-width: 970px;
-    min-width: 150px;
-}
-.roteerRechts {
-    transform: rotate(5deg);
-}
-.roteerLinks {
-    transform: rotate(-5deg);
-}
-.dikkeSchaduw {
-    border: 4px;
-    border-style: solid;
-    border-color: #E9DCE9;
-    box-shadow: 0.7em 0.7em 0.7em rgba(0,0,0, .5);
-    -moz-box-shadow: 0.7em 0.7em 0.7em rgba(0,0,0, .5);
-    -webkit-box-shadow: 0.7em 0.7em 0.7em rgba (0,0,0, .5);
+h1 {
+    font-size: 1.5em;
 }
 .txtC {
     text-align: center;
-}
-h1 {
-    font-size: 1.5em;
 }
 .txtL {
     text-align: left;
@@ -150,19 +124,19 @@ p small {
 .button a {
     color: red;
 }
-dt {
-    margin: 0 0 1em;
-    border-bottom: thin red solid;
-}
 dl {
     padding: 1em;
+    margin: 0;
 }
 dt {
-    margin: 0 2em;
+    padding: 0 2em;
     font-size: 1.1em;
 }
 dd {
-    margin: 0 4em;
+    padding: 0 4em;
+}
+.innercontainer>dl>dd, .innercontainer>dl>dt {
+    border-bottom: solid thin #ccffff;
 }
 label {
     width: 7em;
@@ -190,10 +164,6 @@ em {
     h1 {
         font-size: 2.4em;
     }
-    .img50vw {
-        width: 60vw;
-        max-width: 540px;
-    }
     .logo h1 {
         font-size: 3em;
     }
@@ -209,13 +179,6 @@ em {
         border-radius: 4px;
         max-width: 743px;
     }
-    .img50vw {
-        width: 70vw;
-        max-width: 550px;
-    }
-    .nomob {
-        display: block;
-    }
     .h1 {
         font-size: 3em;
     }
@@ -224,18 +187,10 @@ em {
     .container {
         max-width: 967px;
     }
-    .img50vw {
-        width: 70vw;
-        max-width: 770px;
-    }
 }
 @media (min-width: 1200px) {
     .container {
         max-width: 1175px;
-    }
-    .img50vw {
-        width: 70vw;
-        max-width: 970px;
     }
     .h1 {
         font-size: 5em;
@@ -247,8 +202,8 @@ em {
         display: none;
     }
     @page {
-        size: auto;   /* auto is the initial value */
-        margin: 0mm;  /* this affects the margin in the printer settings */
+        size: auto;
+        margin: 0mm;
     }
     a[href]:after {
         content: none !important;

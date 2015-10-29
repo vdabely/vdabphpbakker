@@ -18,15 +18,12 @@
             $page = $_GET['page'];
             $file = 'presentation/'.$page.'.php';
             if (file_exists($file)) {
-                if (isset($_COOKIE['LoginC'])) {
-                    $klantID = $_COOKIE['LoginC'];
+                if (isset($_SESSION['LoginC'])) {
+                    $klantID = $_SESSION['LoginC'];
                     include ($file);
                 }
-                if (!isset($_COOKIE['LoginC'])&&($page=='registreer'||$page=='login'||$page=='faq')) {
+                if (!isset($_SESSION['LoginC'])&&($page=='registreer'||$page=='login'||$page=='faq')) {
                     include ($file);
-                }
-                if (!isset($_COOKIE['LoginC'])){
-                    include ('presentation/home.php');
                 }
             }
         }

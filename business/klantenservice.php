@@ -1,6 +1,6 @@
 <?php
 
-require_once("data/KlantenDAO.php");
+require_once("data/klantenDAO.php");
 
 class klantService {
 
@@ -32,6 +32,17 @@ class klantService {
         }
     }
     
+    public function klantAktief($KlantID) {
+        $klantActief = klantService::getKlantFromId($KlantID);
+        $aktief = $klantActief->Aktief;
+        if ($aktief) {
+            KlantenDAO::klantDesAktief($KlantID);
+        }
+        if (!$aktief) {
+            KlantenDAO::klantAktief($KlantID);
+        }
+    }
+    
     public function mailPaswoord($email, $paswoord) {
         $subject = 'Uw Paswoord voor Lokale Bakker';
         $message = '
@@ -51,10 +62,12 @@ class klantService {
         </body>
         </html>
         ';
-        $headers = 'From: Lokale Bakker' . "\r\n" .
-            'Reply-To: ely@telenet.be' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-        mail($email, $subject, $message, $headers);    
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+        $headers .= 'From: <warmebakker@scoofy.be>' . "\r\n";
+
+        mail($email,$subject,$message,$headers);
     }
 
 

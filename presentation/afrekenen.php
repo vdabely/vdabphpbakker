@@ -7,13 +7,25 @@ if (isset($_SESSION['bestelregelarray'])) {
 if (isset($_GET['datum'])) { 
     $datum = $_GET['datum'];
 }
+if (isset($_SESSION['LoginC'])) {
+    $KlantID = $_SESSION['LoginC'];
+}
 
 
-if (isset($_GET['pay'])) {
+if (isset($_GET['pay'])&&isset($_GET['datum'])) {
     $prijs = $_GET['pay'];
-    $bestelDoorgevoerd = bestelService::bestellingDoorvoeren($arrBestelRegel, $datum, $prijs);
-    if ($bestelDoorgevoerd) {
-        header("Location: ?page=besteloverzicht");
+    if ($prijs!==0) {
+        $bestelDoorgevoerd = bestellingService::bestellingDoorvoeren($arrBestelRegel, $datum, $prijs, $klantID);
+    }
+    if (isset($bestelDoorgevoerd)) {
+?>
+        <div class="wrapper clearfix">
+            <div class="txtC">
+                <h1>Uw bestelling is doorgevoerd.</h1>
+            </div>
+        </div>
+<?php
+        include 'presentation/besteloverzicht.php';
         die();
     }
     $msg = "Al besteld die dag. Opnieuw : ";
@@ -29,7 +41,7 @@ if (isset($datum)) {
         $msg = "Foute datum ingegeven. Opnieuw : ";
         $error = TRUE;
     }
-    $alBesteldOpDatum = bestelService::alBesteldDieDag($datum, $klantID);
+    $alBesteldOpDatum = bestellingService::alBesteldDieDag($datum, $klantID);
     if ($alBesteldOpDatum) {
         $msg = "Al een bestelling op die datum. Opnieuw : ";
         $error = TRUE;
@@ -54,19 +66,19 @@ if (isset($arrBestelRegel)) {
                 <form action="index.php" method="get">
                     <input type="hidden" name="page" value="afrekenen">
                     <?php print ($msg); ?><input type="date" name="datum" min="<?php print ($min); ?>" max="<?php print($max); ?>" value="<?php print ($min); ?>" autofocus=""></br></br>
-                    <input type="submit" value="Verder.">
+                    <input type="submit" value="Verder." class="button">
                 </form>
             </div>
         </div>
     <?php 
     }
     if (isset($datum)&&!isset($error)) {
-        $totprijs = bestelService::totaalBestelling($arrBestelRegel)
+        $totprijs = bestelRegelService::totaalBestelling($arrBestelRegel)
     ?>
         <div class="wrapper clearfix">
             <div class="txtC">
                 <h3>Beste <?php print $naam; ?> Gelieve <strong>&euro; <?php print $totprijs; ?></strong> te betalen</h3>
-                <a title="Betaal met BC" class="button" href="index.php?page=afrekenen&datum=<?php print $datum; ?>&pay=<?php print $totprijs; ?>"><span>Bacontact</span></a>
+                <a title="Betaal met BC" class="button" href="index.php?page=afrekenen&datum=<?php print $datum; ?>&pay=<?php print $totprijs; ?>"><span>Bankcontact</span></a>
                 <a title="Betaal met VISA" class="button" href="index.php?page=afrekenen&datum=<?php print $datum; ?>&pay=<?php print $totprijs; ?>"><span>Visa</span></a>
             </div>
         </div>

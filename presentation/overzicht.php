@@ -9,15 +9,24 @@ if (isset($_GET['verwijder'])) {
             </div>
             <div class="wrapper clearfix txtC">
 <?php
-$arrBestellingen = bestellingService::getBestellingFromKlantId($klantID);
+$nextdatum = "";
+$arrBestellingen = bestellingService::getAllBestellingen();
 foreach ($arrBestellingen as $bestelling) {
-    print ("<div class='innercontainer txtL'>&nbsp;");
+    $klantID = $bestelling->KlantID;
+    $klant = klantService::getKlantFromId($klantID);
     $dbDatum = $bestelling->Besteldatum;
     $datum = date('d-m-Y',strtotime($dbDatum));
     $BestelID = $bestelling->BestelID;
-    print ("<dl><dt>Bestelling voor ".$datum."</dt>");
+    $klantnaam = $klant->Naam." ".$klant->VNaam;
+    if ($nextdatum=="") {
+        print ($datum."<hr/>");
+    } else if ($nextdatum!=$dbDatum) {
+        print ("<hr/>".$datum."<hr/>");
+    }
+    print ("<div class='innercontainer txtL'>&nbsp;");
+    print ("<dl><dt>Bestelling voor ".$klantnaam." op ".$datum."</dt>");
+    $totPrijs = $bestelling->Prijs;
     $arrBestelRegel = bestelRegelService::getBestelRegelsFromId($BestelID);
-    $totprijs=0;
     foreach ($arrBestelRegel as $regel) {
         $productID = $regel->productID;
         $aantal = $regel->aantal;
@@ -27,13 +36,11 @@ foreach ($arrBestellingen as $bestelling) {
         if ($aantal) {
             print ("<dd>".$aantal." x ".$product->product." <strong>&euro; ".$productPrijs."</strong> = &euro; ".$prijs."</dd>");
         }
-        $totprijs += $prijs;
     }
-    print ("<dt>Totaalprijs = &euro; ".$totprijs."</dt></dl>");
-    if ($dbDatum>date('Y-m-d', time()+86400)) {
-        print ("<a href='?page=besteloverzicht&verwijder=".$BestelID."'>bestelling anulleren</a>");
-    }
-    print ("&nbsp;</div>");
+        print ("<dt>Totaalprijs = &euro; ".$totPrijs."</dt>");
+        print ("</dl><a href='?page=overzicht&verwijder=".$BestelID."'>bestelling verwijderen</a>");
+    print ("</div>");
+    $nextdatum = $dbDatum;
 }
 if (!$arrBestellingen) {
     print ("<dt>Geen bestellingen geplaatst.</dt>");

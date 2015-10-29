@@ -1,6 +1,6 @@
 <?php
     $arrBestelRegel = $_SESSION['bestelregelarray'];
-    $karNietLeeg = bestelService::winkelkarNietLeeg($arrBestelRegel);
+    $karNietLeeg = bestelRegelService::winkelkarNietLeeg($arrBestelRegel);
 
 if (isset($arrBestelRegel)&&$karNietLeeg) {
 ?>
@@ -29,7 +29,7 @@ if (isset($arrBestelRegel)&&$karNietLeeg) {
                         }
                         $totprijs += $prijs;
                     }
-                    print ("<dt><hr>&nbsp;&nbsp;Totaalprijs = &euro; ".$totprijs."</dt>");
+                    print ("<dt>Totaalprijs = &euro; ".$totprijs."</dt>");
                 ?>
                 </dl>
             </div>

@@ -1,6 +1,6 @@
 <?php
 
-require_once("data/KlantenDAO.php");
+require_once("data/klantenDAO.php");
 
 class loginservice {
     
@@ -9,16 +9,15 @@ class loginservice {
         if ($login) {
             $DBpaswoord = $login->Paswoord;
             $klantID = $login->KlantID;
-            $actief = $login->Aktief;
-            if (isset($actief)&&!$actief) {
-                return false;
-                die();
-            }
-            if (sha1($paswoord)==$DBpaswoord&&$actief) {
-                setcookie ("LoginC", $klantID, time() + 86400); // 60*60*24 = 86400 => 1 dag
-                return true;
+            if (sha1($paswoord)==$DBpaswoord) {
+                setcookie ("LoginC", $email, time() + (10 * 365 * 24 * 60 * 60)); // 10 jaar geldig
+                $_SESSION["LoginC"] = $klantID;
+                return $login;
             }
         }
+    }
+    public function logout() {
+        session_destroy();
     }
     
 }

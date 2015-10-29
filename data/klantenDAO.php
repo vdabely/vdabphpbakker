@@ -11,11 +11,11 @@ class KlantenDAO {
         $result = $dbh->query($sql);
         $arrKlanten = array();
         foreach ($result as $rij) {
-            $klant = new Klant($rij['KlantID'], $rij["Email"], $rij["Paswoord"], $rij["Naam"], $rij["VNaam"], $rij["Adres"], $rij["Postcode"], $rij["Gemeente"], $rij["Aktief"]);
+            $klant = new Klant($rij['KlantID'], $rij["Email"], $rij["Paswoord"], $rij["Naam"], $rij["Vnaam"], $rij["Adres"], $rij["Postcode"], $rij["Gemeente"], $rij["Aktief"]);
             array_push($arrKlanten, $klant);
         }
         $dbh = null;
-        return $arrBestellingen;
+        return $arrKlanten;
       }
 
     public static function getKlantFromId($id) {
@@ -59,6 +59,20 @@ class KlantenDAO {
         if (isset($nieuweKlant)) {
             return NULL;
         }
+    }
+    
+    public function klantAktief($KlantID) {
+        $sql = "UPDATE klanten SET Aktief = '1' WHERE KlantID = '".$KlantID."'";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $dbh->exec($sql);
+        $dbh=NULL;
+    }
+
+    public function klantDesAktief($KlantID) {
+        $sql = "UPDATE klanten SET Aktief = '0' WHERE KlantID = '".$KlantID."'";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $dbh->exec($sql);
+        $dbh=NULL;
     }
 
   }
